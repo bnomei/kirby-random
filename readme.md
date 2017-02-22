@@ -72,7 +72,13 @@ The plugin also add a new `$site->random()` function to use in templates etc.
 
 ```
 <?php 
-	// LIST
+	// STRING
+	echo $site->random(23);
+
+	// NUMBER
+	echo $site->random([41, 53], 'between');
+
+	// POOL
 	// from comma seperated a string
 	echo $site->random('red, green, blue, black, white, yellow', 'pool', 3);
 	// or a php array
