@@ -68,7 +68,7 @@ A number between a min and max value inclusive using PHP `random_int()`.
 (random: lorem type: paragraphs length: 2)
 ```
 
-The plugin also add a new `$site->random()` function to use in templates etc.
+The plugin also adds a `$site->random()` function to use in templates etc.
 
 ```
 <?php 
@@ -79,7 +79,7 @@ The plugin also add a new `$site->random()` function to use in templates etc.
 	echo $site->random([41, 53], 'between');
 
 	// POOL
-	// from comma seperated a string
+	// from a comma seperated string
 	echo $site->random('red, green, blue, black, white, yellow', 'pool', 3);
 	// or a php array
 	echo $site->random($myArray, 'pool', 3);
