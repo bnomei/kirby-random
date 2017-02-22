@@ -1,4 +1,4 @@
-# Kirby Siteoption
+# Kirby Random
 
 ![GitHub release](https://img.shields.io/github/release/bnomei/kirby-random.svg?maxAge=1800) ![License](https://img.shields.io/github/license/mashape/apistatus.svg) ![Kirby Version](https://img.shields.io/badge/Kirby-2.3%2B-red.svg)
 
