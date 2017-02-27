@@ -66,6 +66,7 @@ A number between a min and max value inclusive using PHP `random_int()`.
 (random: lorem length: 5) or (random: lorem type: words length: 4)
 (random: lorem type: sentences length: 3)
 (random: lorem type: paragraphs length: 2)
+(random: lorem type: chars length: 140)
 ```
 
 The plugin also adds a `$site->random()` function to use in templates etc.

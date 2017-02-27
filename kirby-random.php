@@ -34,21 +34,24 @@ class KirbyRandom {
       if($type == 'sentences') {
         return $lipsum->sentences($length);
       }
-        else if($type == 'paragraphs') {
-          if($calle == 'site::method') {
-            $pa = $lipsum->paragraphsArray($length);
-            $re = '';
-            foreach ($pa as $p) {
-              $re .= '<p>'.$p.'</p>';
-            }
-            return $re;
-          } else {
-            return $lipsum->paragraphs($length);
+      else if($type == 'paragraphs') {
+        if($calle == 'site::method') {
+          $pa = $lipsum->paragraphsArray($length);
+          $re = '';
+          foreach ($pa as $p) {
+            $re .= '<p>'.$p.'</p>';
           }
+          return $re;
+        } else {
+          return $lipsum->paragraphs($length);
         }
-        else {
-          return $lipsum->words($length);
-        }
+      }
+      else if($type == 'chars') {
+        return substr($lipsum->words($length), 0, $length);
+      }
+      else {
+        return $lipsum->words($length);
+      }
     }
 
     // RANDOM positive non-zero number
