@@ -4,6 +4,8 @@
 
 Kirby CMS Tag to generate various random values.
 
+This plugin is free but if you use it in a commercial project please consider to [make a donation 🍻](https://www.paypal.me/bnomei/5).
+
 ## Requirements
 
 - [**Kirby**](https://getkirby.com/) 2.3+
