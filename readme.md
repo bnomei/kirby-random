@@ -9,6 +9,7 @@ This plugin is free but if you use it in a commercial project please consider to
 ## Requirements
 
 - [**Kirby**](https://getkirby.com/) 2.3+
+- Since version 1.3.0 this Plugin does **not** required php7 anymore
 
 ## Installation
 
@@ -37,7 +38,7 @@ Random string using [Kirby Toolkit](https://getkirby.com/docs/toolkit/api/str/ra
 (random: 5) or (random: 5 type:alpha)
 ```
 
-Random positiv non-zero number with max value inclusive using PHP `random_int()`.
+Random positiv non-zero number with max value inclusive using PHP `random_int()` (or `rand()` in php5).
 
 ```
 (random: number length: 128)
@@ -57,7 +58,7 @@ or
 (random: red, green, blue, black, white, yellow type: pool length: 3)
 ```
 
-A number between a min and max value inclusive using PHP `random_int()`.
+A number between a min and max value inclusive using PHP `random_int()` (or `rand()` in php5).
 ```
 (random: 41, 53 type: between)
 ```
