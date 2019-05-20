@@ -1,7 +1,7 @@
 {
   "name": "kirby-random",
   "description": "Kirby CMS Tag to get various random values.",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "type": "kirby-plugin",
   "license": "MIT"
 }

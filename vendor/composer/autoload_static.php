@@ -20,11 +20,16 @@ class ComposerStaticInitaec9f722d999e1d9e05fc7b15f4c4f06
         ),
     );
 
+    public static $classMap = array (
+        'joshtronic\\LoremIpsum' => __DIR__ . '/..' . '/joshtronic/php-loremipsum/src/LoremIpsum.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitaec9f722d999e1d9e05fc7b15f4c4f06::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitaec9f722d999e1d9e05fc7b15f4c4f06::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitaec9f722d999e1d9e05fc7b15f4c4f06::$classMap;
 
         }, null, ClassLoader::class);
     }

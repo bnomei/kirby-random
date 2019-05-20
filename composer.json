@@ -1,5 +1,9 @@
 {
     "require": {
         "joshtronic/php-loremipsum": "^1.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
     }
 }

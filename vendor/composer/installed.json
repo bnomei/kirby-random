@@ -1,17 +1,17 @@
 [
     {
         "name": "joshtronic/php-loremipsum",
-        "version": "1.0.1",
-        "version_normalized": "1.0.1.0",
+        "version": "1.0.4",
+        "version_normalized": "1.0.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/joshtronic/php-loremipsum.git",
-            "reference": "5ad1e4e9f75392f51b4ee9a1b9d0ac6b082dfe2f"
+            "reference": "e41f4f76303b09b66448100d45a1bfdf695192bd"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/joshtronic/php-loremipsum/zipball/5ad1e4e9f75392f51b4ee9a1b9d0ac6b082dfe2f",
-            "reference": "5ad1e4e9f75392f51b4ee9a1b9d0ac6b082dfe2f",
+            "url": "https://api.github.com/repos/joshtronic/php-loremipsum/zipball/e41f4f76303b09b66448100d45a1bfdf695192bd",
+            "reference": "e41f4f76303b09b66448100d45a1bfdf695192bd",
             "shasum": ""
         },
         "require": {
@@ -20,7 +20,7 @@
         "require-dev": {
             "satooshi/php-coveralls": "~1.0"
         },
-        "time": "2016-06-09 03:04:41",
+        "time": "2019-01-03T06:21:50+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -35,8 +35,8 @@
         "authors": [
             {
                 "name": "Josh Sherman",
-                "email": "josh@gravityblvd.com",
-                "homepage": "http://joshtronic.com"
+                "email": "hello@joshtronic.com",
+                "homepage": "https://joshtronic.com"
             }
         ],
         "description": "Lorem ipsum generator in PHP without dependencies",

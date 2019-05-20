@@ -6,4 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'joshtronic\\LoremIpsum' => $vendorDir . '/joshtronic/php-loremipsum/src/LoremIpsum.php',
 );
