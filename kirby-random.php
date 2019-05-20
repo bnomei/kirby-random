@@ -2,96 +2,93 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-class KirbyRandom {
+class KirbyRandom
+{
+    protected static function random_int($min, $max)
+    {
+        return function_exists('random_int') ? random_int($min, $max) : rand($min, $max);
+    }
 
-  protected static function random_int($min, $max) {
-    return function_exists('random_int') ? random_int($min, $max) : rand($min, $max);
-  }
-
-  public static function random($random, $type = false, $length = false, $calle = '') {
-    // LIST
-    if(count($random) > 1) {
-      if(strtolower($type) == 'between') {
-        $min = intval($random[0]);
-        $max = intval($random[count($random)-1]);
-        return (string)self::random_int($min, $max);
-
-      } else if(strtolower($type) == 'pool') {
-        $l = $length && $length <= count($random) ? $length : count($random);
-        if($l == count($random)) {
-          $s = $random;
-          shuffle($s);
-        return implode(', ', $s);
-        } else {
-          $poolkeys = array_rand($random, $l);
-          return implode(', ', array_intersect_key($random, array_flip($poolkeys)));
+    public static function random($random, $type = false, $length = false, $calle = '')
+    {
+        // LIST
+        if (count($random) > 1) {
+            if (strtolower($type) == 'between') {
+                $min = intval($random[0]);
+                $max = intval($random[count($random)-1]);
+                return (string)self::random_int($min, $max);
+            } elseif (strtolower($type) == 'pool') {
+                $l = $length && $length <= count($random) ? $length : count($random);
+                if ($l == count($random)) {
+                    $s = $random;
+                    shuffle($s);
+                    return implode(', ', $s);
+                } else {
+                    $poolkeys = array_rand($random, $l);
+                    return implode(', ', array_intersect_key($random, array_flip($poolkeys)));
+                }
+            } else {
+                return (string)$random[self::random_int(0, count($random)-1)];
+            }
         }
 
-
-      } else {
-        return (string)$random[self::random_int(0, count($random)-1)];
-      }
-    }
-
-    // LOREM using https://github.com/joshtronic/php-loremipsum
-    else if ($length && count($random) > 0 && strtolower($random[0]) == 'lorem') {
-      $lipsum = new joshtronic\LoremIpsum();
-      if($type == 'sentences') {
-        return $lipsum->sentences($length);
-      }
-      else if($type == 'paragraphs') {
-        if($calle == 'site::method') {
-          $pa = $lipsum->paragraphsArray($length);
-          $re = '';
-          foreach ($pa as $p) {
-            $re .= '<p>'.$p.'</p>';
-          }
-          return $re;
-        } else {
-          return $lipsum->paragraphs($length);
+        // LOREM using https://github.com/joshtronic/php-loremipsum
+        elseif ($length && count($random) > 0 && strtolower($random[0]) == 'lorem') {
+            $lipsum = new joshtronic\LoremIpsum();
+            if ($type == 'sentences') {
+                return $lipsum->sentences($length);
+            } elseif ($type == 'paragraphs') {
+                if ($calle == 'site::method') {
+                    $pa = $lipsum->paragraphsArray($length);
+                    $re = '';
+                    foreach ($pa as $p) {
+                        $re .= '<p>'.$p.'</p>';
+                    }
+                    return $re;
+                } else {
+                    return $lipsum->paragraphs($length);
+                }
+            } elseif ($type == 'chars') {
+                return substr($lipsum->words($length), 0, $length);
+            } else {
+                return $lipsum->words($length);
+            }
         }
-      }
-      else if($type == 'chars') {
-        return substr($lipsum->words($length), 0, $length);
-      }
-      else {
-        return $lipsum->words($length);
-      }
-    }
 
-    // RANDOM positive non-zero number
-    else if($length && strtolower($type) == 'number') {
-      return (string)self::random_int(1, $length);
-    }
+        // RANDOM positive non-zero number
+        elseif ($length && strtolower($type) == 'number') {
+            return (string)self::random_int(1, $length);
+        }
 
-    // RANDOM string
-    else {
-      $l = $length ? $length : intval($random[0]);
-      $t = $type ? $type : false;
-      return $t ? str::random($l, $t) : str::random($l);
+        // RANDOM string
+        else {
+            $l = $length ? $length : intval($random[0]);
+            $t = $type ? $type : false;
+            return $t ? str::random($l, $t) : str::random($l);
+        }
     }
-  }
 }
 
-$kirby->set('site::method', 'random',
-  function($page, $random, $type = false, $length = false) {
-
-    if(gettype($random) == 'string') {
-      $random = explode(',', str_replace(', ', ',', $random));
-    } else if(gettype($random) == 'integer') {
-      $random = array($random);
+$kirby->set(
+    'site::method',
+    'random',
+    function ($page, $random, $type = false, $length = false) {
+        if (gettype($random) == 'string') {
+            $random = explode(',', str_replace(', ', ',', $random));
+        } elseif (gettype($random) == 'integer') {
+            $random = array($random);
+        }
+        return KirbyRandom::random($random, $type, $length, 'site::method');
     }
-    return KirbyRandom::random($random, $type, $length, 'site::method');
-});
+);
 
 $kirby->set('tag', 'random', array(
   'attr' => array('length', 'type'),
-  'html' => function($tag) {
+  'html' => function ($tag) {
+      $random = explode(',', str_replace(', ', ',', (string)$tag->attr('random')));
+      $type = $tag->attr('type');
+      $length = $tag->attr('length') ? intval($tag->attr('length')) : false;
 
-    $random = explode(',', str_replace(', ', ',', (string)$tag->attr('random')));
-    $type = $tag->attr('type');
-    $length = $tag->attr('length') ? intval($tag->attr('length')) : false;
-
-    return KirbyRandom::random($random, $type, $length, 'tag');
+      return KirbyRandom::random($random, $type, $length, 'tag');
   }
 ));
